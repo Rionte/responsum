@@ -1,7 +1,8 @@
-import { MSG_CAPTURE_PAGE, sendToBackground } from "../../../lib/messaging";
+import type { PopupContext } from "../types";
+import { MSG_ANALYZE, MSG_CAPTURE_PAGE, sendToBackground } from "../../../lib/messaging";
 import { clearDraft, getDraft, saveDraft } from "../../../lib/storage";
 
-export async function renderCaptureView(container: HTMLElement): Promise<void> {
+export async function renderCaptureView(container: HTMLElement, ctx: PopupContext): Promise<void> {
   container.innerHTML = `
     <h1>Responsum</h1>
     <p class="hint">Paste assignment instructions, or capture them from the current page.</p>
@@ -10,7 +11,7 @@ export async function renderCaptureView(container: HTMLElement): Promise<void> {
       <button id="clear-draft" class="ghost">Clear</button>
     </div>
     <textarea id="draft-text" placeholder="Paste the assignment instructions here"></textarea>
-    <div class="row"><button id="save-draft" class="primary">Save draft</button></div>
+    <div class="row"><button id="analyze" class="primary">Analyze with Claude</button></div>
     <p id="capture-status" class="status"></p>`;
   const textarea = container.querySelector("#draft-text") as HTMLTextAreaElement;
   const status = container.querySelector("#capture-status") as HTMLElement;
@@ -37,13 +38,19 @@ export async function renderCaptureView(container: HTMLElement): Promise<void> {
     status.textContent = "";
   });
 
-  container.querySelector("#save-draft")?.addEventListener("click", async () => {
+  container.querySelector("#analyze")?.addEventListener("click", async () => {
     const text = textarea.value.trim();
     if (!text) {
       status.textContent = "Paste or capture some instructions first.";
       return;
     }
     await saveDraft({ capturedText: text, title: null, sourceUrl: null });
-    status.textContent = "Draft saved.";
+    status.textContent = "Analyzing with Claude...";
+    const res = await sendToBackground<{ assignmentId: string }>(MSG_ANALYZE);
+    if (!res.ok) {
+      status.textContent = res.error ?? "Analysis failed.";
+      return;
+    }
+    ctx.navigate("summary");
   });
 }

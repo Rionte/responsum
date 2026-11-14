@@ -1,3 +1,7 @@
-import type { BackgroundHandler } from "../../lib/messaging";
+import { MSG_ANALYZE, type BackgroundHandler } from "../../lib/messaging";
+import { summarizeDraft } from "./summarize";
 
-export const handlers: Record<string, BackgroundHandler> = {};
+// Background message registry: each feature branch registers its handlers here
+export const handlers: Record<string, BackgroundHandler> = {
+  [MSG_ANALYZE]: () => summarizeDraft()
+};
