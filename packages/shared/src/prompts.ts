@@ -14,6 +14,7 @@ Return ONLY a JSON array of steps, each shaped:
 { "id": number, "title": string, "description": string, "estimatedMinutes": number, "dependsOn": number[], "tips": string[] }
 Order steps by real-world dependency (setup, build, test, review) and set dependsOn to the ids that must finish first.
 estimatedMinutes must be realistic for a student. Include a final step that reviews the work against the grading criteria.
+Keep the plan compact: at most 12 steps, descriptions under 30 words each, and at most 3 tips per step.
 Do not invent requirements that are not in the summary or instructions.`;
 
 export const QA_SYSTEM_PROMPT = `You answer questions about one school assignment.
