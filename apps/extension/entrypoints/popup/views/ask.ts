@@ -6,7 +6,7 @@ export async function renderAskView(container: HTMLElement): Promise<void> {
     <p class="hint">Answers come only from the captured summary, plan, and instructions.</p>
     <textarea id="ask-input" placeholder="e.g. What format does the report need?"></textarea>
     <div class="row"><button id="ask" class="primary">Ask</button></div>
-    <p id="ask-status" class="status"></p>
+    <p id="ask-status" class="status" aria-live="polite"></p>
     <div id="answer" class="card answer"></div>`;
   const input = container.querySelector("#ask-input") as HTMLTextAreaElement;
   const button = container.querySelector("#ask") as HTMLButtonElement;

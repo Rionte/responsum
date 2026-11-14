@@ -17,7 +17,7 @@ export async function renderPlanView(container: HTMLElement, ctx: PopupContext):
       <h1>${esc(assignment.title)}</h1>
       <p class="empty">No plan yet. Let Claude break the assignment into steps.</p>
       <div class="row"><button id="generate" class="primary">Generate plan</button></div>
-      <p id="plan-status" class="status"></p>`;
+      <p id="plan-status" class="status" aria-live="polite"></p>`;
     const button = container.querySelector("#generate") as HTMLButtonElement;
     const status = container.querySelector("#plan-status") as HTMLElement;
     button.addEventListener("click", async () => {
