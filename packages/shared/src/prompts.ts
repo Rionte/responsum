@@ -1,6 +1,6 @@
 // Pinned model IDs; re-check the Anthropic models page near the hackathon date
-export const MODEL_BALANCED = "claude-sonnet-4-5";
-export const MODEL_FAST = "claude-haiku-4-5";
+export const MODEL_BALANCED = "claude-sonnet-5-5";
+export const MODEL_FAST = "claude-haiku-5-5";
 
 export const SUMMARIZER_SYSTEM_PROMPT = `You are a study assistant that extracts structure from school assignment instructions.
 Return ONLY a JSON object, no markdown fence and no commentary, with exactly these fields:

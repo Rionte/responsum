@@ -34,6 +34,11 @@ export async function callClaudeText(
   });
   if (!res.ok) {
     const body = await res.text();
+    if (res.status === 404 && body.includes("not_found_error") && body.includes("model")) {
+      throw new Error(
+        `The pinned Claude model is not available on this API key. Pick another model in the options page or update the model IDs in packages/shared/src/prompts.ts. API said: ${truncate(body, 200)}`
+      );
+    }
     throw new Error(`Claude API error ${res.status}: ${truncate(body, 300)}`);
   }
   const data = (await res.json()) as ClaudeResponse;
