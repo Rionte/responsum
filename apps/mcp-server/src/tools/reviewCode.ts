@@ -24,7 +24,7 @@ export function registerReviewCode(server: McpServer): void {
     const user = `${requirements}\n${focus ? `Review focus: ${focus}\n` : ""}File: ${filePath ?? "unspecified"}\n\nCode to review:\n${code}`;
     const findings = await parseWithRetry(
       findingsSchema,
-      (retryUser) => callClaudeText(REVIEWER_SYSTEM_PROMPT, retryUser, MODEL_BALANCED, 2000),
+      (retryUser) => callClaudeText(REVIEWER_SYSTEM_PROMPT, retryUser, MODEL_BALANCED, 4000),
       user
     );
     return { content: [{ type: "text", text: formatFindings(findings) }] };
