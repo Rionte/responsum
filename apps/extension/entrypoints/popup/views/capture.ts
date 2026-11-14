@@ -1,6 +1,6 @@
 import type { PopupContext } from "../types";
 import { MSG_ANALYZE, MSG_CAPTURE_PAGE, sendToBackground } from "../../../lib/messaging";
-import { clearDraft, getDraft, saveDraft } from "../../../lib/storage";
+import { clearCaptureBadge, clearDraft, getDraft, saveDraft } from "../../../lib/storage";
 
 export async function renderCaptureView(container: HTMLElement, ctx: PopupContext): Promise<void> {
   container.innerHTML = `
@@ -12,7 +12,7 @@ export async function renderCaptureView(container: HTMLElement, ctx: PopupContex
     </div>
     <textarea id="draft-text" placeholder="Paste the assignment instructions here"></textarea>
     <div class="row"><button id="analyze" class="primary">Analyze with Claude</button></div>
-    <p id="capture-status" class="status"></p>`;
+    <p id="capture-status" class="status" aria-live="polite"></p>`;
   const textarea = container.querySelector("#draft-text") as HTMLTextAreaElement;
   const status = container.querySelector("#capture-status") as HTMLElement;
   const draft = await getDraft();
@@ -51,6 +51,7 @@ export async function renderCaptureView(container: HTMLElement, ctx: PopupContex
       status.textContent = res.error ?? "Analysis failed.";
       return;
     }
+    await clearCaptureBadge();
     ctx.navigate("summary");
   });
 }

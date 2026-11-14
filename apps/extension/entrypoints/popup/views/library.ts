@@ -17,7 +17,7 @@ export async function renderLibraryView(
     <h1>Library</h1>
     ${renderLibraryList(assignments, current?.id)}
     <div class="row"><button id="export-plan" class="ghost">Copy current plan as Markdown</button></div>
-    <p id="library-status" class="status"></p>`;
+    <p id="library-status" class="status" aria-live="polite"></p>`;
   const status = container.querySelector("#library-status") as HTMLElement;
 
   container.addEventListener("click", async (event) => {

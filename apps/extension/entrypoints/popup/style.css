@@ -53,3 +53,17 @@ ul.library li { display: flex; align-items: center; gap: 8px; border: 1px solid 
 ul.library li.current { border-color: var(--accent); }
 ul.library .open { flex: 1; text-align: left; background: none; border: none; padding: 0; font-weight: 600; color: var(--fg); }
 ul.library .meta { color: var(--muted); font-size: 11px; white-space: nowrap; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827;
+    --fg: #f3f4f6;
+    --muted: #9ca3af;
+    --border: #374151;
+    --card: #1f2937;
+    --accent: #818cf8;
+    --accent-fg: #111827;
+  }
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
