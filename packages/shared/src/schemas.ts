@@ -25,10 +25,22 @@ export const planStepSchema: z.ZodType<PlanStep> = z.object({
 // Planner output is an array of steps
 export const planSchema: z.ZodType<PlanStep[]> = z.array(planStepSchema);
 
+// Planner draft: same shape minus done, which is client-side UI state set on save
+export const planStepDraftSchema: z.ZodType<Omit<PlanStep, "done">> = z.object({
+  id: z.number(),
+  title: z.string(),
+  description: z.string(),
+  estimatedMinutes: z.number().nonnegative(),
+  dependsOn: z.array(z.number()),
+  tips: z.array(z.string())
+});
+
+export const planDraftSchema: z.ZodType<Omit<PlanStep, "done">[]> = z.array(planStepDraftSchema);
+
 export const reviewFindingSchema: z.ZodType<ReviewFinding> = z.object({
   severity: z.enum(["BLOCKING", "SHOULD_FIX", "NIT"]),
   file: z.string(),
-  line: z.number().nullable(),
+  line: z.number().nullable().optional(),
   issue: z.string(),
   fix: z.string()
 });

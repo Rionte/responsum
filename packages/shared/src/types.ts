@@ -39,7 +39,7 @@ export interface PlanStep {
 export interface ReviewFinding {
   severity: "BLOCKING" | "SHOULD_FIX" | "NIT";
   file: string;
-  line: number | null;
+  line?: number | null; // the model often omits it
   issue: string;
   fix: string; // the minimal concrete change
 }
