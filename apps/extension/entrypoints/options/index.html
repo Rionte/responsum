@@ -2,11 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsum Options</title>
+    <title>Responsum options</title>
   </head>
   <body>
-    <main id="app"></main>
+    <main class="options">
+      <h1>Responsum options</h1>
+      <label for="api-key">Anthropic API key</label>
+      <input id="api-key" type="password" autocomplete="off" />
+      <label for="model">Default model</label>
+      <select id="model">
+        <option value="balanced">Balanced (Sonnet) for summaries and plans</option>
+        <option value="fast">Fast (Haiku) for quick questions</option>
+      </select>
+      <div class="row">
+        <button id="save" class="primary">Save</button>
+        <button id="test" class="ghost">Test key</button>
+      </div>
+      <p id="status" class="status"></p>
+    </main>
     <script type="module" src="./main.ts"></script>
   </body>
 </html>
