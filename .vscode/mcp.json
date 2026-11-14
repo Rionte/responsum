@@ -1,0 +1,25 @@
+{
+  // Responsum MCP server for Copilot agent mode. Requires VS Code 1.99+.
+  // Runs from source via tsx, so `npm install` at the repo root is the only prerequisite.
+  "servers": {
+    "responsum": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "${workspaceFolder}/apps/mcp-server/src/index.ts"
+      ],
+      "env": {
+        "ANTHROPIC_API_KEY": "${input:anthropicKey}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "anthropicKey",
+      "type": "promptString",
+      "description": "Anthropic API key for Responsum MCP tools",
+      "password": true
+    }
+  ]
+}
