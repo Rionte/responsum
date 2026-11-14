@@ -1,0 +1,25 @@
+ :root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --card: #f9fafb;
+  --danger: #dc2626;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; padding: 12px; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; background: var(--bg); color: var(--fg); }
+body.popup { width: 380px; }
+h1 { font-size: 16px; margin: 4px 0 8px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.tab { flex: 1; background: none; border: none; padding: 6px 4px; cursor: pointer; color: var(--muted); font: inherit; border-radius: 6px; }
+.tab.active { background: var(--card); color: var(--accent); font-weight: 600; }
+button { font: inherit; cursor: pointer; border-radius: 6px; border: 1px solid var(--border); background: var(--card); padding: 6px 10px; color: var(--fg); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+button.ghost { background: transparent; }
+.row { display: flex; gap: 8px; margin: 8px 0; }
+.row button { flex: 1; }
+textarea { width: 100%; min-height: 140px; font: inherit; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); resize: vertical; }
+.status, .hint { color: var(--muted); min-height: 16px; margin: 6px 0; }
