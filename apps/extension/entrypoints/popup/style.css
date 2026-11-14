@@ -47,3 +47,4 @@ ol.plan label { display: flex; gap: 8px; align-items: baseline; cursor: pointer;
 ul.tips { margin: 6px 0 0; padding-left: 18px; color: var(--muted); }
 .options { max-width: 420px; margin: 0 auto; }
 .options label { display: block; margin: 12px 0 4px; font-weight: 600; }
+.answer { white-space: pre-wrap; }
