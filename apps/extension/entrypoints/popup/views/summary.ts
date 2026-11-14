@@ -1,22 +1,17 @@
-import { getCurrentAssignment } from "../../../lib/storage";
-import { esc } from "../../../lib/dom";
 import type { PopupContext } from "../types";
+import { getCurrentAssignment } from "../../../lib/storage";
+import { renderSummaryCard } from "../../../components/SummaryCard";
+import { esc } from "../../../lib/dom";
 
-export async function renderSummaryView(
-  container: HTMLElement,
-  ctx: PopupContext
-): Promise<void> {
+export async function renderSummaryView(container: HTMLElement, ctx: PopupContext): Promise<void> {
   const assignment = await getCurrentAssignment();
-  if (!assignment) {
-    container.innerHTML = `<p class="empty">Nothing captured yet.</p>`;
+  if (!assignment?.summary) {
+    container.innerHTML = `<p class="empty">No summary yet. Capture instructions and analyze them first.</p>`;
     return;
   }
   container.innerHTML = `
     <h1>${esc(assignment.title)}</h1>
-    <p class="hint">${esc(assignment.sourceUrl)}</p>
-    <div class="card"><p class="answer">${esc(assignment.capturedText)}</p></div>
-    <div class="row"><button id="view-plan" class="primary">View plan</button></div>`;
-  container.querySelector("#view-plan")?.addEventListener("click", () => {
-    ctx.navigate("plan");
-  });
+    ${renderSummaryCard(assignment.summary)}
+    <div class="row"><button id="to-plan" class="primary">Go to plan</button></div>`;
+  container.querySelector("#to-plan")?.addEventListener("click", () => ctx.navigate("plan"));
 }
